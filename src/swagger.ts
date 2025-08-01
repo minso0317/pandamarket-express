@@ -1,5 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
-import { REDIRECT_PORT, SERVER_URL } from "./lib/constance";
+import { env } from "./config";
 
 const swaggerDefinition = {
   openapi: "3.0.1",
@@ -10,7 +10,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://${SERVER_URL}:${REDIRECT_PORT || 3000}`,
+      url: `http://${env.SERVER_URL}:${env.REDIRECT_PORT || 3000}`,
       description: "기본 API 서버",
     },
   ],
