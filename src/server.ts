@@ -1,9 +1,6 @@
-import dotenv from "dotenv";
 import app from "./main";
 import { createServer } from "http";
 import { env } from "./config";
-
-dotenv.config();
 
 const server = createServer(app);
 

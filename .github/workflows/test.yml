@@ -1,4 +1,4 @@
-name: example_name # 테스트 이름
+name: Pandamarket Test # 테스트 이름
 
 on:
   push:
@@ -72,8 +72,8 @@ jobs:
       - name: Migrate database
         run: npm run prisma:migrate # Prisma 마이그레이션 적용 (testdb에 스키마 반영)
 
-      - name: DB Seed
-        run: npm run prisma:seed
+      # - name: DB Seed
+      #   run: npm run prisma:seed
 
       - name: Type Check
         run: npm run typecheck # TypeScript 타입 검사 수행
