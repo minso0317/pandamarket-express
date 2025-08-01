@@ -1,12 +1,9 @@
-import dotenv from "dotenv";
-import { createServer } from "http";
 import app from "./main";
-import { PORT } from "./lib/constance";
-
-dotenv.config();
+import { createServer } from "http";
+import { env } from "./config";
 
 const server = createServer(app);
 
-server.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+server.listen(env.PORT, () => {
+  console.log(`Server started on port ${env.PORT}`);
 });
