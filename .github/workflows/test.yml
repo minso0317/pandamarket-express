@@ -78,8 +78,9 @@ jobs:
       - name: Type Check
         run: npm run typecheck # TypeScript 타입 검사 수행
 
-      - name: Run **test_file_name** unit tests # unit example-test 이름
-        run: npm run **test_file_name**-unit # unit example-test 실행
 
-      - name: Run **test_file_name** integration tests # integration example-test 이름
-        run: npm run **test_file_name**-int # integration example-test 실행
+      # - name: Run **test_file_name** unit tests # unit example-test 이름
+      #   run: npm run **test_file_name**-unit # unit example-test 실행
+
+      # - name: Run **test_file_name** integration tests # integration example-test 이름
+      #   run: npm run **test_file_name**-int # integration example-test 실행
