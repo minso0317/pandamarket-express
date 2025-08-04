@@ -21,14 +21,14 @@ export async function createProduct(
 export async function getProductList(req: Request, res: Response) {
   const data = await productService.getProductList();
 
-  res.status(200).json(data);
+  res.status(200).json(data.map((product) => new ProductResponseDto(product)));
 }
 
 export async function getProduct(req: Request, res: Response) {
   const { id } = create(req.params, IdParamsStruct);
   const product = await productService.getProduct(id);
 
-  res.status(200).json(product);
+  res.status(200).json(new ProductResponseDto(product));
 }
 
 export async function updateProduct(req: Request, res: Response) {
@@ -43,5 +43,5 @@ export async function deleteProduct(req: Request, res: Response) {
   const { id } = create(req.params, IdParamsStruct);
   await productService.deleteProduct(id);
 
-  res.status(204).json();
+  res.status(204).send();
 }

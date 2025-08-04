@@ -1,13 +1,14 @@
+import { Product } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { CreateProductType, UpdateProductType } from "../structs/productStruct";
 
-export async function createProduct(data: CreateProductType) {
-  return await prisma.product.create({
+export async function createProduct(data: CreateProductType): Promise<Product> {
+  return prisma.product.create({
     data,
   });
 }
 
-export async function getProductList() {
+export async function getProductList(): Promise<Product[]> {
   return await prisma.product.findMany({
     orderBy: {
       createdAt: "desc",
@@ -15,21 +16,24 @@ export async function getProductList() {
   });
 }
 
-export async function getProduct(id: number) {
+export async function getProduct(id: number): Promise<Product | null> {
   return await prisma.product.findUnique({
     where: { id },
   });
 }
 
-export async function updateProduct(id: number, data: UpdateProductType) {
+export async function updateProduct(
+  id: number,
+  data: UpdateProductType
+): Promise<Product> {
   return await prisma.product.update({
     where: { id },
     data,
   });
 }
 
-export async function deleteProduct(id: number) {
-  return await prisma.product.delete({
+export async function deleteProduct(id: number): Promise<void> {
+  await prisma.product.delete({
     where: { id },
   });
 }

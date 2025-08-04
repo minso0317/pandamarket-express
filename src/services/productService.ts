@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import NotFoundError from "../lib/errors/NotFoundError";
 import * as productRepository from "../repositories/productRepository";
 import { CreateProductType, UpdateProductType } from "../structs/productStruct";
@@ -13,26 +14,36 @@ export async function getProductList() {
 export async function getProduct(id: number) {
   const product = await productRepository.getProduct(id);
   if (!product) {
-    throw new NotFoundError("This dose not exist");
+    throw new NotFoundError("Product not found");
   }
 
   return product;
 }
 
 export async function updateProduct(id: number, data: UpdateProductType) {
-  const product = await productRepository.getProduct(id);
-  if (!product) {
-    throw new NotFoundError("This dose not exist");
+  try {
+    return await productRepository.updateProduct(id, data);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Product not found");
+    }
+    throw error;
   }
-
-  return await productRepository.updateProduct(id, data);
 }
 
 export async function deleteProduct(id: number) {
-  const product = await productRepository.getProduct(id);
-  if (!product) {
-    throw new NotFoundError("This dose not exist");
+  try {
+    return await productRepository.deleteProduct(id);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Product not found");
+    }
+    throw error;
   }
-
-  return await productRepository.deleteProduct(id);
 }
