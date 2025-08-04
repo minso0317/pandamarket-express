@@ -38,3 +38,10 @@ export async function updateProduct(req: Request, res: Response) {
 
   res.status(200).json(new ProductResponseDto(product));
 }
+
+export async function deleteProduct(req: Request, res: Response) {
+  const { id } = create(req.params, IdParamsStruct);
+  await productService.deleteProduct(id);
+
+  res.status(204).json();
+}

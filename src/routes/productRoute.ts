@@ -2,6 +2,7 @@ import express from "express";
 import { withAsync } from "../lib/withAsync";
 import {
   createProduct,
+  deleteProduct,
   getProduct,
   getProductList,
   updateProduct,
@@ -13,5 +14,6 @@ productRouter.post("/", withAsync(createProduct));
 productRouter.get("/", withAsync(getProductList));
 productRouter.get("/:id", withAsync(getProduct));
 productRouter.patch("/:id", withAsync(updateProduct));
+productRouter.delete("/:id", withAsync(deleteProduct));
 
 export default productRouter;

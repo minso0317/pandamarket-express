@@ -27,3 +27,12 @@ export async function updateProduct(id: number, data: UpdateProductType) {
 
   return await productRepository.updateProduct(id, data);
 }
+
+export async function deleteProduct(id: number) {
+  const product = await productRepository.getProduct(id);
+  if (!product) {
+    throw new NotFoundError("This dose not exist");
+  }
+
+  return await productRepository.deleteProduct(id);
+}

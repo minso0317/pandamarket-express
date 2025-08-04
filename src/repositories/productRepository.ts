@@ -27,3 +27,9 @@ export async function updateProduct(id: number, data: UpdateProductType) {
     data,
   });
 }
+
+export async function deleteProduct(id: number) {
+  return await prisma.product.delete({
+    where: { id },
+  });
+}
