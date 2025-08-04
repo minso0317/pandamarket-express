@@ -9,7 +9,7 @@ export async function createProduct(data: CreateProductType): Promise<Product> {
 }
 
 export async function getProductList(): Promise<Product[]> {
-  return await prisma.product.findMany({
+  return prisma.product.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -17,7 +17,7 @@ export async function getProductList(): Promise<Product[]> {
 }
 
 export async function getProduct(id: number): Promise<Product | null> {
-  return await prisma.product.findUnique({
+  return prisma.product.findUnique({
     where: { id },
   });
 }
@@ -26,7 +26,7 @@ export async function updateProduct(
   id: number,
   data: UpdateProductType
 ): Promise<Product> {
-  return await prisma.product.update({
+  return prisma.product.update({
     where: { id },
     data,
   });

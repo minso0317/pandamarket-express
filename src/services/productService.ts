@@ -1,17 +1,17 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, Product } from "@prisma/client";
 import NotFoundError from "../lib/errors/NotFoundError";
 import * as productRepository from "../repositories/productRepository";
 import { CreateProductType, UpdateProductType } from "../structs/productStruct";
 
-export async function createProduct(data: CreateProductType) {
+export async function createProduct(data: CreateProductType): Promise<Product> {
   return await productRepository.createProduct(data);
 }
 
-export async function getProductList() {
+export async function getProductList(): Promise<Product[]> {
   return await productRepository.getProductList();
 }
 
-export async function getProduct(id: number) {
+export async function getProduct(id: number): Promise<Product> {
   const product = await productRepository.getProduct(id);
   if (!product) {
     throw new NotFoundError("Product not found");
@@ -20,7 +20,10 @@ export async function getProduct(id: number) {
   return product;
 }
 
-export async function updateProduct(id: number, data: UpdateProductType) {
+export async function updateProduct(
+  id: number,
+  data: UpdateProductType
+): Promise<Product> {
   try {
     return await productRepository.updateProduct(id, data);
   } catch (error) {
@@ -34,7 +37,7 @@ export async function updateProduct(id: number, data: UpdateProductType) {
   }
 }
 
-export async function deleteProduct(id: number) {
+export async function deleteProduct(id: number): Promise<void> {
   try {
     return await productRepository.deleteProduct(id);
   } catch (error) {
