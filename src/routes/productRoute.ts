@@ -4,6 +4,7 @@ import {
   createProduct,
   getProduct,
   getProductList,
+  updateProduct,
 } from "../controllers/productController";
 
 const productRouter = express.Router();
@@ -11,5 +12,6 @@ const productRouter = express.Router();
 productRouter.post("/", withAsync(createProduct));
 productRouter.get("/", withAsync(getProductList));
 productRouter.get("/:id", withAsync(getProduct));
+productRouter.patch("/:id", withAsync(updateProduct));
 
 export default productRouter;

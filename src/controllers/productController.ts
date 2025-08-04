@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import * as productService from "../services/productService";
 import { ProductResponseDto } from "../dto/productDto";
-import { createProductBodyStruct } from "../structs/productStruct";
+import {
+  createProductBodyStruct,
+  updateProductBodyStruct,
+} from "../structs/productStruct";
 import { create } from "superstruct";
 import { IdParamsStruct } from "../structs/commonStruct";
 
@@ -17,11 +20,21 @@ export async function createProduct(
 
 export async function getProductList(req: Request, res: Response) {
   const data = await productService.getProductList();
+
   res.status(200).json(data);
 }
 
 export async function getProduct(req: Request, res: Response) {
   const { id } = create(req.params, IdParamsStruct);
   const product = await productService.getProduct(id);
+
   res.status(200).json(product);
+}
+
+export async function updateProduct(req: Request, res: Response) {
+  const { id } = create(req.params, IdParamsStruct);
+  const data = create(req.body, updateProductBodyStruct);
+  const product = await productService.updateProduct(id, data);
+
+  res.status(200).json(new ProductResponseDto(product));
 }
