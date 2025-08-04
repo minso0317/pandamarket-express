@@ -10,7 +10,7 @@ import {
 } from "superstruct";
 
 export const createProductBodyStruct = object({
-  name: nonempty(nonempty(string())),
+  name: nonempty(string()),
   description: nonempty(string()),
   price: min(integer(), 0),
   tags: array(nonempty(string())),
