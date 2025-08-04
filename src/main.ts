@@ -8,6 +8,7 @@ import {
   defaultNotFoundHandler,
   globalErrorHandler,
 } from "./controllers/errorController";
+import productRouter from "./routes/productRoute";
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(env.STATIC_PATH, express.static(env.PUBLIC_PATH));
+
+app.use("/product", productRouter);
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
