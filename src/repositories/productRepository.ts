@@ -14,3 +14,9 @@ export async function getProductList() {
     },
   });
 }
+
+export async function getProduct(id: number) {
+  return await prisma.product.findUnique({
+    where: { id },
+  });
+}
