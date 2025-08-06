@@ -41,3 +41,10 @@ export async function updateArticle(req: Request, res: Response) {
 
   res.status(200).json(new ArticleRepositoryDto(article));
 }
+
+export async function deleteArticle(req: Request, res: Response) {
+  const { id } = create(req.params, IdParamsStruct);
+  await articleService.deleteArticle(id);
+
+  res.status(204).send();
+}

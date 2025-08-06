@@ -31,3 +31,9 @@ export async function updateArticle(
     data,
   });
 }
+
+export async function deleteArticle(id: number): Promise<void> {
+  await prisma.article.delete({
+    where: { id },
+  });
+}

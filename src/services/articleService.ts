@@ -36,3 +36,17 @@ export async function updateArticle(
     throw error;
   }
 }
+
+export async function deleteArticle(id: number): Promise<void> {
+  try {
+    return await articleRepository.deleteArticle(id);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Article not found");
+    }
+    throw error;
+  }
+}
