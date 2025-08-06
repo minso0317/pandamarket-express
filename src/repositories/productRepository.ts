@@ -16,7 +16,7 @@ export async function getProductList(): Promise<Product[]> {
   });
 }
 
-export async function getProduct(id: number): Promise<Product | null> {
+export async function getProductById(id: number): Promise<Product | null> {
   return prisma.product.findUnique({
     where: { id },
   });

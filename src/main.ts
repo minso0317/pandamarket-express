@@ -9,6 +9,7 @@ import {
   globalErrorHandler,
 } from "./controllers/errorController";
 import productRouter from "./routes/productRoute";
+import articleRouter from "./routes/articleRoute";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(env.STATIC_PATH, express.static(env.PUBLIC_PATH));
 
 app.use("/product", productRouter);
+app.use("/article", articleRouter);
 
 app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
