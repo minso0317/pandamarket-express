@@ -21,3 +21,12 @@ export async function getArticleList(req: Request, res: Response) {
     .status(200)
     .json(data.map((article) => new ArticleRepositoryDto(article)));
 }
+
+export async function getArticleById(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const { id } = create(req.params, IdParamsStruct);
+  const article = await articleService.getArticleById(id);
+  res.status(200).json(new ArticleRepositoryDto(article));
+}

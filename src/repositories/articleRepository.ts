@@ -15,3 +15,9 @@ export async function getArticleList(): Promise<Article[]> {
     },
   });
 }
+
+export async function getArticleById(id: number): Promise<Article | null> {
+  return prisma.article.findUnique({
+    where: { id },
+  });
+}
