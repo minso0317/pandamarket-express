@@ -1,0 +1,17 @@
+import { Article } from "@prisma/client";
+import { prisma } from "../lib/prisma";
+import { CreateArticleType } from "../structs/articleStruct";
+
+export async function createArticle(data: CreateArticleType): Promise<Article> {
+  return prisma.article.create({
+    data,
+  });
+}
+
+export async function getArticleList(): Promise<Article[]> {
+  return prisma.article.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
