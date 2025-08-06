@@ -24,9 +24,9 @@ export async function getProductList(req: Request, res: Response) {
   res.status(200).json(data.map((product) => new ProductResponseDto(product)));
 }
 
-export async function getProduct(req: Request, res: Response) {
+export async function getProductById(req: Request, res: Response) {
   const { id } = create(req.params, IdParamsStruct);
-  const product = await productService.getProduct(id);
+  const product = await productService.getProductById(id);
 
   res.status(200).json(new ProductResponseDto(product));
 }

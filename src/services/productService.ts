@@ -11,8 +11,8 @@ export async function getProductList(): Promise<Product[]> {
   return await productRepository.getProductList();
 }
 
-export async function getProduct(id: number): Promise<Product> {
-  const product = await productRepository.getProduct(id);
+export async function getProductById(id: number): Promise<Product> {
+  const product = await productRepository.getProductById(id);
   if (!product) {
     throw new NotFoundError("Product not found");
   }
