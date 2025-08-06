@@ -1,6 +1,6 @@
-import { Article } from "@prisma/client";
+import { Article, Prisma } from "@prisma/client";
 import * as articleRepository from "../repositories/articleRepository";
-import { CreateArticleType } from "../structs/articleStruct";
+import { CreateArticleType, UpdateArticleType } from "../structs/articleStruct";
 import NotFoundError from "../lib/errors/NotFoundError";
 
 export async function createArticle(data: CreateArticleType): Promise<Article> {
@@ -18,4 +18,21 @@ export async function getArticleById(id: number): Promise<Article> {
   }
 
   return article;
+}
+
+export async function updateArticle(
+  id: number,
+  data: UpdateArticleType
+): Promise<Article> {
+  try {
+    return await articleRepository.updateArticle(id, data);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      throw new NotFoundError("Article not found");
+    }
+    throw error;
+  }
 }

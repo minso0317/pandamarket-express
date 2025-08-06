@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import * as articleService from "../services/articleService";
-import { createArticleBodyStruct } from "../structs/articleStruct";
+import {
+  createArticleBodyStruct,
+  updateArticleBodyStruct,
+} from "../structs/articleStruct";
 import { create } from "superstruct";
 import { ArticleRepositoryDto } from "../dto/articleDto";
 import { IdParamsStruct } from "../structs/commonStruct";
@@ -28,5 +31,13 @@ export async function getArticleById(
 ): Promise<void> {
   const { id } = create(req.params, IdParamsStruct);
   const article = await articleService.getArticleById(id);
+  res.status(200).json(new ArticleRepositoryDto(article));
+}
+
+export async function updateArticle(req: Request, res: Response) {
+  const { id } = create(req.params, IdParamsStruct);
+  const data = create(req.body, updateArticleBodyStruct);
+  const article = await articleService.updateArticle(id, data);
+
   res.status(200).json(new ArticleRepositoryDto(article));
 }

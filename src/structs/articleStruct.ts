@@ -1,4 +1,4 @@
-import { Infer, nonempty, object, string } from "superstruct";
+import { Infer, nonempty, object, partial, string } from "superstruct";
 
 export const createArticleBodyStruct = object({
   title: nonempty(string()),
@@ -7,3 +7,7 @@ export const createArticleBodyStruct = object({
 });
 
 export type CreateArticleType = Infer<typeof createArticleBodyStruct>;
+
+export const updateArticleBodyStruct = partial(createArticleBodyStruct);
+
+export type UpdateArticleType = Infer<typeof updateArticleBodyStruct>;
