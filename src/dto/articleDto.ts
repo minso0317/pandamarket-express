@@ -1,6 +1,6 @@
 import { Article } from "@prisma/client";
 
-export class ArticleRepositoryDto {
+export class ArticleResponseDto {
   id: number;
   title: string;
   content: string;

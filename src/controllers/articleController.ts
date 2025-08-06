@@ -5,7 +5,7 @@ import {
   updateArticleBodyStruct,
 } from "../structs/articleStruct";
 import { create } from "superstruct";
-import { ArticleRepositoryDto } from "../dto/articleDto";
+import { ArticleResponseDto } from "../dto/articleDto";
 import { IdParamsStruct } from "../structs/commonStruct";
 
 export async function createArticle(
@@ -14,15 +14,13 @@ export async function createArticle(
 ): Promise<void> {
   const data = create(req.body, createArticleBodyStruct);
   const article = await articleService.createArticle(data);
-  res.status(201).json(new ArticleRepositoryDto(article));
+  res.status(201).json(new ArticleResponseDto(article));
 }
 
 export async function getArticleList(req: Request, res: Response) {
   const data = await articleService.getArticleList();
 
-  res
-    .status(200)
-    .json(data.map((article) => new ArticleRepositoryDto(article)));
+  res.status(200).json(data.map((article) => new ArticleResponseDto(article)));
 }
 
 export async function getArticleById(
@@ -31,7 +29,7 @@ export async function getArticleById(
 ): Promise<void> {
   const { id } = create(req.params, IdParamsStruct);
   const article = await articleService.getArticleById(id);
-  res.status(200).json(new ArticleRepositoryDto(article));
+  res.status(200).json(new ArticleResponseDto(article));
 }
 
 export async function updateArticle(req: Request, res: Response) {
@@ -39,7 +37,7 @@ export async function updateArticle(req: Request, res: Response) {
   const data = create(req.body, updateArticleBodyStruct);
   const article = await articleService.updateArticle(id, data);
 
-  res.status(200).json(new ArticleRepositoryDto(article));
+  res.status(200).json(new ArticleResponseDto(article));
 }
 
 export async function deleteArticle(req: Request, res: Response) {
